@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+<body>
 <center> <h1> Who Wants Shots? </h1> </center>
 
 <center> <img src="./Images/myriam-zilles-Ep941iDLwhk-unsplash.jpg" alt="Sick Stuffy" width="800"/> </center>
@@ -11,6 +14,8 @@
 
 <span style='font-size:20px;'></span>
 <p> &#128137; THIS kind! &#x1F489;</p>
+</body>
+</html>
 
 
 Utilizing data courtesy of the United States National Center for Health Statistics, I hope to be able to predict whether or not a given citizen will choose to be vaccinated based on existing patterns from survey results from the 2009 National Health Flu Survey. 
