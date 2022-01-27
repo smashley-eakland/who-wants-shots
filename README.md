@@ -169,7 +169,7 @@ Top 10 Ranking Feature Importances for model `rf_gs`:
  * behavioral_touch_face	0.013559
  * employment_industry_fcxhlnwr	0.013258
  
-![Random Forest Visuals - Seasonal Flu](./Images/Flu/RF_flu-Combined.png)
+![Random Forest Visuals - Seasonal Flu](./Images/Flu/RF_flu-combined.png)
  
 ### AdaBoost and GradientBoost
 
