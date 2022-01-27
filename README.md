@@ -12,18 +12,21 @@
 <span style='font-size:20px;'></span>
 <p> &#128137; THIS kind! &#x1F489;</p>
 
+# Business Understanding 
 
 Utilizing data courtesy of the United States National Center for Health Statistics, I hope to be able to predict whether or not a given citizen will choose to be vaccinated based on existing patterns from survey results from the 2009 National Health Flu Survey. 
 
-Stakeholder: Small research firm on behalf of the Office of Infectious Diseases (subdivision of the US Department of Health and Human Services).
+##### Stakeholder: Small research firm on behalf of the Office of Infectious Diseases (subdivision of the US Department of Health and Human Services).
 
-Business Problem: Guiding public health efforts with regard to vaccination status based on underlying patterns in the opinions, backgrounds, educations and other socio-economic factors in the general population with the goal to increase the number of vaccinated citizens. 
+##### Business Problem: Guiding public health efforts with regard to vaccination status based on underlying patterns in the opinions, backgrounds, educations and other socio-economic factors from survey responses by the general population detected by predictive modeling with the goal of increasing the number of vaccinated citizens. 
 
-##### Target Variable - Seasonal Flu Vaccine or H1N1 Vaccine 
-(For the project submission, I am submitting my Seasonal Flu analysis, though I did complete analysis on both the H1N1 and Seasonal Flu targets. I will discuss the data preparation and modeling steps for each below. There is a notebook, README, and files for each target on an individual branch in this repository as well. Please reference the Seasonal Flu or H1N1 branch for individualized analysis on each if you so desire.)
+#### Target Variable - Seasonal Flu Vaccine or H1N1 Vaccine 
+For the project submission, I am submitting the Seasonal Flu analysis. However, I did complete analysis on both the H1N1 and Seasonal Flu targets. I will discuss the data preparation and modeling steps for each target below. There is a notebook, README, and files for each target separately on an individual branch in this repository as well. Please reference the Flu or H1N1 branch for separated analysis on each.
 
 
-##### Target Metric(s) - Accuracy Percentage, AUC, Precision -  Precision is targeted as in this scenario, a False Positive would be worse than a False Negative. False positive cases would be unvaccinated populations left out of consideration of public outreach programs versus a vaccinated person being offered something they'd already received.
+#### Target Metric(s) - Accuracy Percentage, AUC, Precision - 
+Precision is targeted as in this scenario, a False Positive would be worse than a False Negative. False positive cases would be unvaccinated populations left out of consideration of public outreach programs versus a vaccinated person being offered something they'd already received.
+
     * False Positive -> Precision Score -> Predicts Vaccinated, Citizen was Un-vaccinated. 
     * False Negative -> Recall Score -> Predicts Un-vaccinated, Citizen was vaccinated. 
 
@@ -111,8 +114,11 @@ Classes of vaccinated and unvaccinated are unbalanced with unvaccinated (0) repr
 Data notes for consideration:
 
 Average (arithmetic mean) opinion of risk - 2.28, which is low end out of 5. (Median and mode 2)
+
 Average (arithmetic mean) opinion of vaccine effectiveness - 3.91, which is higher end out of 5. (Median and mode 4)
+
 Average (arithmetic mean) H1N1 concern level 1.52 out of 3. (Median and mode 2)
+
 Even with these numbers, 70% of respondents were not vaccinated against H1N1. Intuitively may make sense given the lower end opinion of risk, even given the middle range concern level and high opinion of effectiveness. 
 
 
