@@ -1,4 +1,5 @@
 <center> <h1> Who Wants Shots? </h1> </center>
+<center> <h4> Seasonal Flu Edition </h4> </center>
 
 <center> <img src="./Images/myriam-zilles-Ep941iDLwhk-unsplash.jpg" alt="Sick Stuffy" width="800"/> </center>
 <center> Photo by <a href="https://unsplash.com/@myriamzilles?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Myriam Zilles</a> on <a href="https://unsplash.com/collections/IUPhDJeZav4/flu-vaccination-social?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> </center>
@@ -19,8 +20,7 @@ Stakeholder: Small research firm on behalf of the Office of Infectious Diseases 
 
 Business Problem: Guiding public health efforts with regard to vaccination status based on underlying patterns in the opinions, backgrounds, educations and other socio-economic factors in the general population with the goal to increase the number of vaccinated citizens. 
 
-##### Target Variable - Seasonal Flu Vaccine or H1N1 Vaccine 
-(For the project submission, I am submitting my Seasonal Flu analysis, though I did complete analysis on both the H1N1 and Seasonal Flu targets. I will discuss the data preparation and modeling steps for each below. There is a notebook, README, and files for each target on an individual branch in this repository as well. Please reference the Seasonal Flu or H1N1 branch for individualized analysis on each if you so desire.)
+##### Target Variable - Seasonal Flu Vaccine  
 
 
 ##### Target Metric(s) - Accuracy Percentage, AUC, Precision -  Precision is targeted as in this scenario, a False Positive would be worse than a False Negative. False positive cases would be unvaccinated populations left out of consideration of public outreach programs versus a vaccinated person being offered something they'd already received.
@@ -40,9 +40,9 @@ Columns represent the questions asked in the survey, while rows represent the su
 
 Survey questions/column headers are as follows:
  * respondent_id - Number assigned to survey respondent
- * h1n1_concern - Level of concern about the H1N1 flu. 
+ * h1n1_concern - Level of concern about the H1N1 flu. (Omitted from this Seasonal Flu Analysis. Please see H1N1 Branch for this analysis.) 
      * Ranked from 0 (not at all concerned) to 3 (very concerned).
- * h1n1_knowledge - Level of knowledge about H1N1 flu. 
+ * h1n1_knowledge - Level of knowledge about H1N1 flu. (Omitted from this Seasonal Flu Analysis.) 
      * Ranked from 0 (no knowledge) to 2 (a lot of knowledge).
  * behavioral_antiviral_meds - Has respondent taken antiviral medication? Yes/No (binary)
  * behavioral_avoidance - Has respondent avoided close contact with others with flu-like symptoms? Yes/No (binary)
@@ -59,9 +59,9 @@ Survey questions/column headers are as follows:
  * health_insurance - Does respondent have health insurance? Yes/No (binary)
  * opinion_h1n1_vacc_effective - Respondent's personal opinion about H1N1 vaccine effectiveness 
      * Ranked from 1 (not at all effective) to 5 (very effective).
- * opinion_h1n1_risk - Respondent's personal opinion about risk of getting sick with H1N1 flu without vaccine  
+ * opinion_h1n1_risk - Respondent's personal opinion about risk of getting sick with H1N1 flu without vaccine (Omitted from this Seasonal Flu Analysis.) 
      * Ranked from 1 (very low) to 5 (very high)
- * opinion_h1n1_sick_from_vacc - Respondent's worry of getting sick from taking H1N1 vaccine 
+ * opinion_h1n1_sick_from_vacc - Respondent's worry of getting sick from taking H1N1 vaccine (Omitted from this Seasonal Flu Analysis.)
      * Ranked from 1 (not at all worried) to 5 (very worried)
  * opinion_seas_vacc_effective - Respondent's personal opinion about seasonal flu vaccine effectiveness 
      * Ranked from 1 (not at all effective) to 5 (very effective)
@@ -87,7 +87,7 @@ Survey questions/column headers are as follows:
  * household_children - Number of children in household, responses range 0 to 3.
  * employment_industry - Industry respondent is employed in. Values are represented as random, encoded character strings.
  * employment_occupation - Occupation of respondent. Values are represented as random, encoded character strings.
- * h1n1_vaccine - Target Variable for H1N1 predictive analysis 
+ * h1n1_vaccine - Target Variable for H1N1 predictive analysis (Omitted from this Seasonal Flu Analysis.)
  * seasonal_vaccine - Target Variable for seasonal flu predictive analysis
 
 # Data Analysis and Preparation
@@ -99,21 +99,6 @@ For the project submission, I am submitting my Seasonal Flu analysis, though I d
 Through EDA, I discovered there are several object columns that will need to be One Hot Encoded in order to be modeled, including age_group, education, race, sec, marital_status, and employment_industry and occupation, among others. These could turn out to be important features, so I will encode so as to maintain as many features as possible for modeling.
 
 Many columns have many missing values. Survey respondents clearly did not answer every question, which I would expect. After evaluation and modeling with the H1N1 set in my H1N1 notebook, I opted to drop the null values from this seasonal flu dataframe. The balance of classes is much closer in the seasonal vaccine target, which intuitively makes sense. The seasonal flu is, as it's nomenclature would suggest, "seasonal" and annually reoccuring, whereas the H1N1 was a 'pandemic' and rare event. Even after dropping the null values, total counts still exceed 6400 complete survey responses, which I deem to be an adequate count for modeling at this stage. 
-
-### H1N1
-
-Many columns have many missing values. Survey respondents clearly did not answer every question, which I would expect. In order to keep as much data as possible, I opted to drop null values only appearing in the "Health Insurance" category, being that it had the least number of nulls of the three largest categories with empty values. Even after dropping the null values, total counts still exceed 14,000 survey responses, with Employment Occupation and Employment Category being the next largest null value categories (each accounting for almost half of the survey responses), though empty or null responses are seen scattered throughout the categories in small values mostly. I decide to fill the binary missing values with the median value. For the occupation and object categories where reponses were string values and therefore not "averageable" in the dataframe, I decided to fill with "Unknown" where responses were not recorded.
-
-Once this was complete, I One Hot Encoded the object columns so that they could be modeled. These columns included age_group, education, race, sec, marital_status, and employment_industry and occupation, among others. They could turn out to be important features so I want to maintain as many as possible for modeling at this stage.
-
-Classes of vaccinated and unvaccinated are unbalanced with unvaccinated (0) representing ~ 70.3% of the respondents. This will need to be considered during modeling.
-
-Data notes for consideration:
-
-Average (arithmetic mean) opinion of risk - 2.28, which is low end out of 5. (Median and mode 2)
-Average (arithmetic mean) opinion of vaccine effectiveness - 3.91, which is higher end out of 5. (Median and mode 4)
-Average (arithmetic mean) H1N1 concern level 1.52 out of 3. (Median and mode 2)
-Even with these numbers, 70% of respondents were not vaccinated against H1N1. Intuitively may make sense given the lower end opinion of risk, even given the middle range concern level and high opinion of effectiveness. 
 
 
 # Modeling
@@ -217,101 +202,6 @@ Top Ten Ranking Feature Importances for model `gbc2`:
  * rent_or_own_Own	0.011905
 ![GradientBoost Visuals - Seasonal Flu](./Images/Flu/GB-flu-Combined.png)
  
-## H1N1
-
-### Logistic Regression
-
-The first model I wanted to try was logistic regression. I started with a base model and no tuning and on unbalanced data, with a cross validation of 5 folds. Mean cross-validation score was 82%. 
-
-I then decided to run with class weight of balanced to see how performance improved. Mean cross-validation score dropped to 80% on a balanced training dataset. I believe this is due to the balancing of the classes.
-
-For the next iteration, I utilized SMOTE and set to a sampling strategy of 0.65 to bring up the ratio closer to balanced - 60/40. The mean training score was comparable to the Balanced cross-val score - also 80%, but the confusion matrix showed much better performance with regard to correctly identifying classes over perfectly balanced. Opted to run a GridSearchCV to fine tune the hyperparameters. GridSearch deemed optimal parameters to be {'max_iter': 100, 'penalty': 'l2', 'solver': 'lbfgs'} and upon applying these hyperparameters, saw little improvement in the score percentage. 
-
-Scores of the GridSearch tuned LogisticRegression model:
-
-Accuracy: 0.7957883070102522
-
-Precision: 0.6699314397649363
-
-Recall: 0.6309963099630996
-
-F1 Score: 0.6498812351543943
-
-AUC: 0.84
-
-![Logistic Regression Visuals - H1N1](./Images/H1N1/LR-H1N1-combined.png)
-
-### Decision Trees 
-
-Decision Trees were the next model for attempt. Base untuned model, as expected, fit the training data perfectly, but upon cross-validation with 5 folds returned a mean score of 77%. Similar to the Logistic Regression, I ran a GridSearch to find optimal tuning parameters. GridSearch cross validation best score returned an 80%. Optimal parameters and scores returned below.
-
-Best Params: {'criterion': 'entropy', 'max_depth': 5, 'min_samples_leaf': 10}
-
-Accuracy: 0.7927403712939872
-
-Precision: 0.7592592592592593
-
-Recall: 0.45387453874538747
-
-F1 Score: 0.5681293302540416
-
-AUC: 0.81
-
-![Decision Tree Visuals - H1N1](./Images/H1N1/DT-H1N1-Combined.png)
-
-### Random Forests 
-
-The first RandomForest with no tuning returns a mean cross validated score of 84% - an improvement over the tuned DecisionTree CV score. With the RandomForests, I spent a bit more time with GridSearching to tune the parameters and find what would return the highest score. The best performing model uses the parameters {'criterion': 'gini', 'max_depth': 5, 'min_samples_leaf': 5}
-
-RandomForest top performing model scores:
-
-Accuracy: 0.7949570518149072
-
-Precision: 0.7662538699690402
-
-Recall: 0.4566420664206642
-
-F1 Score: 0.5722543352601156
-
-AUC: 0.83
-
-![Random Forest Visuals - H1N1](./Images/H1N1/RF-H1N1-Combined.png)
-
-### AdaBoost and GradientBoost
-
-
-Last of the models I attempted are the more advanced models. I ran both as base models and compared them against each other, then ran GridSearches on both for tuning parameters. Top performing models and tuned parameters for each model type are below.
-
-#### AdaBoost:
-
-Base Model
- * Mean cross-validated score 82%
- 
-Best Performing Model
- * Params {'learning_rate': 1.0, 'n_estimators': 100}
- * Accuracy: 0.8057633693543917
- * Precision: 0.7158962795941376
- * Recall: 0.5857933579335793
- * F1 Score: 0.6443429731100964
- * AUC : 0.84
-
-![Adaboost Visuals - H1N1](./Images/H1N1/Ada_H1N1-Combined.png)
- 
-#### GradientBoost 
-
-Base Model
- * Mean cross-validated score 84%
- 
-Best Performing Model
- * Params {'learning_rate': 0.5, 'n_estimators': 50}
- * Accuracy: 0.8052091992241618
- * Precision: 0.7265160523186682
- * Recall: 0.5636531365313653
- * F1 Score: 0.6348051948051948
- * AUC : 0.84
-
-![GradientBoost Visuals - H1N1](./Images/H1N1/GB-H1N1-Combined.png)
- 
  ## Further Analysis and Limitations
  
 ##### Not to be used for predicting or applying to COVID-19 data.
@@ -319,5 +209,3 @@ Best Performing Model
 Limitation of this analysis for both H1N1 and Seasonal Flu would be unknown employment categories to the model (i.e. the encoded string values that are OHE). Further analysis could be focused around improving the model to allow for those unknown values to pass through for analysis. Additionally, refining the structure of the features for cleaner binary classification would be a worthy step in the data cleaning process. For example, instead of OHE the marital_status - just correct that to be Married and 1/0 in the dataframe and eliminate the need for additional columns. 
 
 A limitation of this analysis specifically for the Seasonal Flu target would be the smaller sample for this particular analysis due to time constraints. Future analysis would be centered around better restructuring of nulls and inclusion of all possible survey responses, possibly filling and binning with "prefer not to answer". Additional further analysis would work to improve performance metrics across the board, though they are consistent in the 70's on this set and less varied than the H1N1 dataset. 
-
-A limitation of the H1N1 analysis was the imbalanced dataset. With the number of features and the smaller number of positives in the imbalanced set, this was a particularly tricky modeling scenario. Balancing the training set yielded worse test results as the test data was imbalanced, so the model didn't know how to pick up on the trends in that data. I believe with additional tuning and time to try additional models, I will be able to refine the H1N1 results. An additional exploratory approach could be to pare down the number of surveys to eliminate some of the less important features or that have answers incomplete that could be impacting model performance.
