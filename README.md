@@ -93,7 +93,7 @@ Survey questions/column headers are as follows:
 
 ### H1N1
 
-Many columns have many missing values. Survey respondents clearly did not answer every question, which I would expect. In order to keep as much data as possible, I opted to drop null values only appearing in the "Health Insurance" category, being that it had the least number of nulls of the three largest categories with empty values. Even after dropping the null values, total counts still exceed 14,000 survey responses, with Employment Occupation and Employment Category being the next largest null value categories (each accounting for almost half of the survey responses), though empty or null responses are seen scattered throughout the categories in small values mostly. I decide to fill the binary missing values with the median value. For the occupation and object categories where reponses were string values and therefore not "averageable" in the dataframe, I decided to fill with "Unknown" where responses were not recorded.
+Many columns have many missing values. Survey respondents clearly did not answer every question, which I would expect. In order to keep as much data as possible, I opted to drop null values only appearing in the "Health Insurance" category, being that it had the least number of nulls of the three largest categories with empty values. Even after dropping the null values, total counts still exceed 14,000 survey responses, with Employment Occupation and Employment Category being the next largest null value categories (each accounting for almost half of the survey responses), though empty or null responses are seen scattered throughout the categories in small values mostly. I decide to fill the numeric missing values with the median value rather than the mean since these are categorical features. For the occupation and object categories where reponses were string values and therefore not "averageable" in the dataframe, I decided to fill with "Unknown" where responses were not recorded.
 
 Once this was complete, I One Hot Encoded the object columns so that they could be modeled. These columns included age_group, education, race, sec, marital_status, and employment_industry and occupation, among others. They could turn out to be important features so I want to maintain as many as possible for modeling at this stage.
 
@@ -102,8 +102,11 @@ Classes of vaccinated and unvaccinated are unbalanced with unvaccinated (0) repr
 Data notes for consideration:
 
 Average (arithmetic mean) opinion of risk - 2.28, which is low end out of 5. (Median and mode 2)
+
 Average (arithmetic mean) opinion of vaccine effectiveness - 3.91, which is higher end out of 5. (Median and mode 4)
+
 Average (arithmetic mean) H1N1 concern level 1.52 out of 3. (Median and mode 2)
+
 Even with these numbers, 70% of respondents were not vaccinated against H1N1. Intuitively may make sense given the lower end opinion of risk, even given the middle range concern level and high opinion of effectiveness. 
 
 
